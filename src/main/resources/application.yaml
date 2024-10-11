@@ -1,0 +1,10 @@
+vaadin:
+  launch-browser: true
+
+spring:
+  application:
+    name: crm
+  datasource:
+    url: jdbc:postgresql://localhost:5432/crm?currentSchema=crm
+    username: postgres
+    password: postgres

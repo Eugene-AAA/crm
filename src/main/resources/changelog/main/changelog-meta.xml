@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+        http://www.liquibase.org/xml/ns/pro
+        http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+
+    <!-- Скрипты добавления метаинформации в БД -->
+    <changeSet id="1" author="PMordvinov">
+        <preConditions>
+            <and>
+                <sqlCheck expectedResult="0">
+                    SELECT COUNT(*)
+                    FROM statuses
+                    WHERE code IN (
+                    'APPLIED',
+                    'INVITED_INTERVIEW',
+                    'INTERVIEW_PASSED',
+                    'INTERVIEW_FAILED',
+                    'INVITED_TEST',
+                    'TEST_PASSED',
+                    'TEST_FAILED',
+                    'INVITED_FINAL_INTERVIEW',
+                    'FINAL_INTERVIEW_PASSED',
+                    'FINAL_INTERVIEW_FAILED',
+                    'INVITED_PROBATION',
+                    'PROBATION_STARTED',
+                    'PROBATION_FAILED',
+                    'PERMANENT_HIRE',
+                    'REJECTED'
+                    )
+                </sqlCheck>
+            </and>
+        </preConditions>
+
+        <insert tableName="statuses">
+            <column name="status_name" value="Отклик"/>
+            <column name="code" value="APPLIED"/>
+            <column name="description" value="Соискатель откликнулся на вакансию"/>
+        </insert>
+        <rollback>
+            <delete tableName="statuses">
+                <where>code='APPLIED'</where>
+            </delete>
+        </rollback>
+
+        <insert tableName="statuses">
+            <column name="status_name" value="Приглашен на собеседование"/>
+            <column name="code" value="INVITED_INTERVIEW"/>
+            <column name="description" value="Соискатель приглашен на первичное собеседование"/>
+        </insert>
+        <rollback>
+            <delete tableName="statuses">
+                <where>code='INVITED_INTERVIEW'</where>
+            </delete>
+        </rollback>
+
+        <insert tableName="statuses">
+            <column name="status_name" value="Прошел собеседование"/>
+            <column name="code" value="INTERVIEW_PASSED"/>
+            <column name="description" value="Соискатель успешно прошел собеседование"/>
+        </insert>
+        <rollback>
+            <delete tableName="statuses">
+                <where>code='INTERVIEW_PASSED'</where>
+            </delete>
+        </rollback>
+
+        <insert tableName="statuses">
+            <column name="status_name" value="Отказ на этапе собеседования"/>
+            <column name="code" value="INTERVIEW_FAILED"/>
+            <column name="description" value="Соискателю отказано после первичного собеседования"/>
+        </insert>
+        <rollback>
+            <delete tableName="statuses">
+                <where>code='INTERVIEW_FAILED'</where>
+            </delete>
+        </rollback>
+
+        <insert tableName="statuses">
+            <column name="status_name" value="Приглашен на тестирование"/>
+            <column name="code" value="INVITED_TEST"/>
+            <column name="description" value="Соискатель приглашен для прохождения тестового задания"/>
+        </insert>
+        <rollback>
+            <delete tableName="statuses">
+                <where>code='INVITED_TEST'</where>
+            </delete>
+        </rollback>
+
+        <insert tableName="statuses">
+            <column name="status_name" value="Прошел тестирование"/>
+            <column name="code" value="TEST_PASSED"/>
+            <column name="description" value="Соискатель успешно выполнил тестовое задание"/>
+        </insert>
+        <rollback>
+            <delete tableName="statuses">
+                <where>code='TEST_PASSED'</where>
+            </delete>
+        </rollback>
+
+        <insert tableName="statuses">
+            <column name="status_name" value="Отказ на этапе тестирования"/>
+            <column name="code" value="TEST_FAILED"/>
+            <column name="description" value="Соискателю отказано после тестирования из-за недостаточных результатов"/>
+        </insert>
+        <rollback>
+            <delete tableName="statuses">
+                <where>code='TEST_FAILED'</where>
+            </delete>
+        </rollback>
+
+        <insert tableName="statuses">
+            <column name="status_name" value="Приглашен на финальное собеседование"/>
+            <column name="code" value="INVITED_FINAL_INTERVIEW"/>
+            <column name="description" value="Соискатель приглашен на финальное собеседование"/>
+        </insert>
+        <rollback>
+            <delete tableName="statuses">
+                <where>code='INVITED_FINAL_INTERVIEW'</where>
+            </delete>
+        </rollback>
+
+        <insert tableName="statuses">
+            <column name="status_name" value="Прошел финальное собеседование"/>
+            <column name="code" value="FINAL_INTERVIEW_PASSED"/>
+            <column name="description" value="Соискатель успешно прошел финальное собеседование"/>
+        </insert>
+        <rollback>
+            <delete tableName="statuses">
+                <where>code='FINAL_INTERVIEW_PASSED'</where>
+            </delete>
+        </rollback>
+
+        <insert tableName="statuses">
+            <column name="status_name" value="Отказ на этапе финального собеседования"/>
+            <column name="code" value="FINAL_INTERVIEW_FAILED"/>
+            <column name="description" value="Соискателю отказано после финального собеседования"/>
+        </insert>
+        <rollback>
+            <delete tableName="statuses">
+                <where>code='FINAL_INTERVIEW_FAILED'</where>
+            </delete>
+        </rollback>
+
+        <insert tableName="statuses">
+            <column name="status_name" value="Приглашен на испытательный срок"/>
+            <column name="code" value="INVITED_PROBATION"/>
+            <column name="description" value="Соискатель приглашен на испытательный срок"/>
+        </insert>
+        <rollback>
+            <delete tableName="statuses">
+                <where>code='INVITED_PROBATION'</where>
+            </delete>
+        </rollback>
+
+        <insert tableName="statuses">
+            <column name="status_name" value="Принят на испытательный срок"/>
+            <column name="code" value="PROBATION_STARTED"/>
+            <column name="description" value="Соискатель начал работу на испытательном сроке"/>
+        </insert>
+        <rollback>
+            <delete tableName="statuses">
+                <where>code='PROBATION_STARTED'</where>
+            </delete>
+        </rollback>
+
+        <insert tableName="statuses">
+            <column name="status_name" value="Не прошел испытательный срок"/>
+            <column name="code" value="PROBATION_FAILED"/>
+            <column name="description" value="Соискатель не смог пройти испытательный срок"/>
+        </insert>
+        <rollback>
+            <delete tableName="statuses">
+                <where>code='PROBATION_FAILED'</where>
+            </delete>
+        </rollback>
+
+        <insert tableName="statuses">
+            <column name="status_name" value="Принят на постоянную работу"/>
+            <column name="code" value="PERMANENT_HIRE"/>
+            <column name="description" value="Соискатель успешно прошел испытательный срок и принят на постоянную работу"/>
+        </insert>
+        <rollback>
+            <delete tableName="statuses">
+                <where>code='PERMANENT_HIRE'</where>
+            </delete>
+        </rollback>
+
+        <insert tableName="statuses">
+            <column name="status_name" value="Отказ на любом этапе"/>
+            <column name="code" value="REJECTED"/>
+            <column name="description" value="Отказ на любом этапе процесса найма"/>
+        </insert>
+        <rollback>
+            <delete tableName="statuses">
+                <where>code='REJECTED'</where>
+            </delete>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>
