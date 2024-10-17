@@ -1,0 +1,31 @@
+package ru.hr.crm.repository.entity.meta;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import lombok.experimental.SuperBuilder;
+import ru.hr.crm.repository.entity.BasicEntity;
+
+@Entity
+@Table(name = "statuses")
+@NoArgsConstructor
+@Getter
+@Setter
+@SuperBuilder
+@ToString
+public class Status extends BasicEntity {
+
+    @Column(name = "code", nullable = false)
+    private String code;
+
+    @Column(name = "status_name", nullable = false, unique = true)
+    private String statusName;
+
+    @Column(name = "description")
+    private String description;
+
+}
