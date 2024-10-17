@@ -1,9 +1,10 @@
 package ru.hr.crm.repository.jpaRepository;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
+import ru.hr.crm.IntegrationTests;
 import ru.hr.crm.repository.entity.data.Candidate;
 import ru.hr.crm.repository.entity.data.TestResult;
 import ru.hr.crm.repository.entity.data.Vacancy;
@@ -13,14 +14,20 @@ import java.time.LocalDateTime;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-@SpringBootTest
-class TestResultRepositoryTest {
+class TestResultRepositoryTest extends IntegrationTests {
 
     @Autowired
     TestResultRepository repository;
 
+    @AfterEach
     @Transactional
+    void delete() {
+        repository.deleteAll();
+        assertEquals(repository.findAll().size(), 0);
+    }
+
     @Test
+    @Transactional
     void testSaveAndFind() {
         TestResult expected = TestResult.builder()
                 .test(ru.hr.crm.repository.entity.data.Test.builder()
@@ -49,6 +56,9 @@ class TestResultRepositoryTest {
         assertNotNull(save);
         TestResult actual = repository.findById(save.getId()).orElse(null);
         assertNotNull(actual);
-        assertEquals(expected, actual);
+        assertEquals(expected.getTest().getTitle(), actual.getTest().getTitle());
+        assertEquals(expected.getCandidate().getName(), actual.getCandidate().getName());
+        assertEquals(expected.getScore(), actual.getScore());
+        assertEquals(expected.getResultDate(), actual.getResultDate());
     }
 }

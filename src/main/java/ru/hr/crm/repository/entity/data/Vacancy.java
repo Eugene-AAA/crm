@@ -12,13 +12,13 @@ import ru.hr.crm.repository.entity.BasicEntity;
 
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "vacancies")
 @NoArgsConstructor
 @Getter
 @Setter
 @SuperBuilder
 @ToString
+@Entity
+@Table(name = "vacancies")
 public class Vacancy extends BasicEntity {
 
     @Column(name = "title", nullable = false)

@@ -16,13 +16,13 @@ import ru.hr.crm.repository.entity.meta.Status;
 
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "status_changes")
 @NoArgsConstructor
 @Getter
 @Setter
 @SuperBuilder
 @ToString
+@Entity
+@Table(name = "status_changes")
 public class StatusChange extends BasicEntity {
 
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})

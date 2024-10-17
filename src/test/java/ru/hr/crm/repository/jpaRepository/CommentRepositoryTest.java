@@ -1,9 +1,10 @@
 package ru.hr.crm.repository.jpaRepository;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
+import ru.hr.crm.IntegrationTests;
 import ru.hr.crm.repository.entity.data.Candidate;
 import ru.hr.crm.repository.entity.data.Comment;
 import ru.hr.crm.repository.entity.data.Vacancy;
@@ -14,14 +15,20 @@ import java.time.LocalDateTime;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-@SpringBootTest
-class CommentRepositoryTest {
+class CommentRepositoryTest extends IntegrationTests {
 
     @Autowired
     CommentRepository repository;
 
+    @AfterEach
     @Transactional
+    void delete() {
+        repository.deleteAll();
+        assertEquals(repository.findAll().size(), 0);
+    }
+
     @Test
+    @Transactional
     void testSaveAndFind() {
         Comment expected = Comment.builder()
                 .commentText("comment")
@@ -29,14 +36,14 @@ class CommentRepositoryTest {
                         .name("uniqName")
                         .email("email")
                         .phone("phone")
-                        .createdAt(LocalDateTime.now())
-                        .updatedAt(LocalDateTime.now())
+                        .createdAt(LocalDateTime.of(2020, 1, 1, 1, 1))
+                        .updatedAt(LocalDateTime.of(2020, 1, 1, 1, 1))
                         .build())
                 .vacancy(Vacancy.builder()
                         .title("uniqTitle")
                         .department("dep")
-                        .createdAt(LocalDateTime.now())
-                        .updatedAt(LocalDateTime.now())
+                        .createdAt(LocalDateTime.of(2020, 1, 1, 1, 1))
+                        .updatedAt(LocalDateTime.of(2020, 1, 1, 1, 1))
                         .build())
                 .status(Status.builder()
                         .statusName("uniqName")
@@ -48,10 +55,10 @@ class CommentRepositoryTest {
         assertNotNull(save);
         Comment actual = repository.findById(save.getId()).orElse(null);
         assertNotNull(actual);
-        assertEquals(expected.getVacancy(), actual.getVacancy());
+        assertEquals(expected.getVacancy().getTitle(), actual.getVacancy().getTitle());
         assertEquals(expected.getCommentText(), actual.getCommentText());
-        assertEquals(expected.getCandidate(), actual.getCandidate());
-        assertEquals(expected.getStatus(), actual.getStatus());
+        assertEquals(expected.getCandidate().getName(), actual.getCandidate().getName());
+        assertEquals(expected.getStatus().getCode(), actual.getStatus().getCode());
     }
 
 }

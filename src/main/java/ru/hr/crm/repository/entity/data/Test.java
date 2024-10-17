@@ -15,13 +15,13 @@ import ru.hr.crm.repository.entity.BasicEntity;
 
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "tests")
 @NoArgsConstructor
 @Getter
 @Setter
 @SuperBuilder
 @ToString
+@Entity
+@Table(name = "tests")
 public class Test extends BasicEntity {
 
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})

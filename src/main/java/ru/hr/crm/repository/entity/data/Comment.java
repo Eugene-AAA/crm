@@ -16,13 +16,13 @@ import ru.hr.crm.repository.entity.meta.Status;
 
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "comments")
 @NoArgsConstructor
 @Getter
 @Setter
 @SuperBuilder
 @ToString
+@Entity
+@Table(name = "comments")
 public class Comment extends BasicEntity {
 
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})

@@ -10,13 +10,13 @@ import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 import ru.hr.crm.repository.entity.BasicEntity;
 
-@Entity
-@Table(name = "statuses")
 @NoArgsConstructor
 @Getter
 @Setter
 @SuperBuilder
 @ToString
+@Entity
+@Table(name = "statuses")
 public class Status extends BasicEntity {
 
     @Column(name = "code", nullable = false)

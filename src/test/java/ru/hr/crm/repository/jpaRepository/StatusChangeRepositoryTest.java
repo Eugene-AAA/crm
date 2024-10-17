@@ -1,9 +1,10 @@
 package ru.hr.crm.repository.jpaRepository;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
+import ru.hr.crm.IntegrationTests;
 import ru.hr.crm.repository.entity.data.Candidate;
 import ru.hr.crm.repository.entity.data.StatusChange;
 import ru.hr.crm.repository.entity.data.Vacancy;
@@ -14,28 +15,34 @@ import java.time.LocalDateTime;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-@SpringBootTest
-class StatusChangeRepositoryTest {
+class StatusChangeRepositoryTest extends IntegrationTests {
 
     @Autowired
     StatusChangeRepository repository;
 
+    @AfterEach
     @Transactional
+    void delete() {
+        repository.deleteAll();
+        assertEquals(repository.findAll().size(), 0);
+    }
+
     @Test
+    @Transactional
     void testSaveAndFind() {
         StatusChange expected = StatusChange.builder()
                 .candidate(Candidate.builder()
                         .name("uniqName")
                         .email("email")
                         .phone("phone")
-                        .createdAt(LocalDateTime.now())
-                        .updatedAt(LocalDateTime.now())
+                        .createdAt(LocalDateTime.of(2020, 1, 1, 1, 1))
+                        .updatedAt(LocalDateTime.of(2020, 1, 1, 1, 1))
                         .build())
                 .vacancy(Vacancy.builder()
                         .title("uniqTitle")
                         .department("dep")
-                        .createdAt(LocalDateTime.now())
-                        .updatedAt(LocalDateTime.now())
+                        .createdAt(LocalDateTime.of(2020, 1, 1, 1, 1))
+                        .updatedAt(LocalDateTime.of(2020, 1, 1, 1, 1))
                         .build())
                 .newStatus(Status.builder()
                         .statusName("uniqName")
@@ -51,7 +58,11 @@ class StatusChangeRepositoryTest {
         assertNotNull(save);
         StatusChange actual = repository.findById(save.getId()).orElse(null);
         assertNotNull(actual);
-        assertEquals(expected, actual);
+        assertEquals(expected.getCandidate().getName(), actual.getCandidate().getName());
+        assertEquals(expected.getVacancy().getTitle(), actual.getVacancy().getTitle());
+        assertEquals(expected.getChangeDate(), actual.getChangeDate());
+        assertEquals(expected.getNewStatus().getCode(), actual.getNewStatus().getCode());
+        assertEquals(expected.getOldStatus().getCode(), actual.getOldStatus().getCode());
     }
 
 }

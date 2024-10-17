@@ -1,9 +1,10 @@
 package ru.hr.crm.repository.jpaRepository;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
+import ru.hr.crm.IntegrationTests;
 import ru.hr.crm.repository.entity.data.Candidate;
 import ru.hr.crm.repository.entity.data.CandidateVacancy;
 import ru.hr.crm.repository.entity.data.Vacancy;
@@ -14,14 +15,20 @@ import java.time.LocalDateTime;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-@SpringBootTest
-class CandidateVacancyRepositoryTest {
+class CandidateVacancyRepositoryTest extends IntegrationTests {
 
     @Autowired
     CandidateVacancyRepository repository;
 
+    @AfterEach
     @Transactional
+    void delete() {
+        repository.deleteAll();
+        assertEquals(repository.findAll().size(), 0);
+    }
+
     @Test
+    @Transactional
     void testSaveAndFind() {
         CandidateVacancy expected = CandidateVacancy.builder()
                 .candidate(Candidate.builder()
