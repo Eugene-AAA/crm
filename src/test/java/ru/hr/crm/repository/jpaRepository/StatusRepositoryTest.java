@@ -4,13 +4,13 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import ru.hr.crm.IntegrationTests;
+import ru.hr.crm.DbTests;
 import ru.hr.crm.repository.entity.meta.Status;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-class StatusRepositoryTest extends IntegrationTests {
+class StatusRepositoryTest extends DbTests {
 
     @Autowired
     StatusRepository repository;

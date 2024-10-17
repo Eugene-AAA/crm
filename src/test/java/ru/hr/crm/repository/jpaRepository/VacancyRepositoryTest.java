@@ -4,7 +4,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import ru.hr.crm.IntegrationTests;
+import ru.hr.crm.DbTests;
 import ru.hr.crm.repository.entity.data.Vacancy;
 
 import java.time.LocalDateTime;
@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-class VacancyRepositoryTest extends IntegrationTests {
+class VacancyRepositoryTest extends DbTests {
 
     @Autowired
     VacancyRepository repository;
