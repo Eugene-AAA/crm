@@ -1,4 +1,4 @@
-package ru.hr.crm.repository.entity.meta;
+package ru.hr.crm.entity.meta;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
-import ru.hr.crm.repository.entity.BasicEntity;
+import ru.hr.crm.entity.BasicEntity;
 
 @NoArgsConstructor
 @Getter

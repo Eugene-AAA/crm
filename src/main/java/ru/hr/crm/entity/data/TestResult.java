@@ -1,4 +1,4 @@
-package ru.hr.crm.repository.entity.data;
+package ru.hr.crm.entity.data;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
-import ru.hr.crm.repository.entity.BasicEntity;
+import ru.hr.crm.entity.BasicEntity;
 
 import java.time.LocalDateTime;
 
@@ -21,23 +21,21 @@ import java.time.LocalDateTime;
 @SuperBuilder
 @ToString
 @Entity
-@Table(name = "tests")
-public class Test extends BasicEntity {
+@Table(name = "test_results")
+public class TestResult extends BasicEntity {
 
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "vacancy_id", nullable = false)
-    private Vacancy vacancy;
+    @JoinColumn(name = "candidate_id", nullable = false)
+    private Candidate candidate;
 
-    @Column(name = "title", nullable = false)
-    private String title;
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinColumn(name = "test_id", nullable = false)
+    private Test test;
 
-    @Column(name = "description", nullable = false)
-    private String description;
+    @Column(name = "score", nullable = false)
+    private int score;
 
-    @Column(name = "max_score", nullable = false)
-    private int maxScore;
-
-    @Column(name = "created_at", nullable = false)
-    private LocalDateTime createdAt;
+    @Column(name = "result_date", nullable = false)
+    private LocalDateTime resultDate;
 
 }

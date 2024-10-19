@@ -1,4 +1,4 @@
-package ru.hr.crm.repository.entity.data;
+package ru.hr.crm.entity.data;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -11,7 +11,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
-import ru.hr.crm.repository.entity.BasicEntity;
+import ru.hr.crm.entity.BasicEntity;
+import ru.hr.crm.entity.meta.Status;
 
 import java.time.LocalDateTime;
 
@@ -21,21 +22,26 @@ import java.time.LocalDateTime;
 @SuperBuilder
 @ToString
 @Entity
-@Table(name = "test_results")
-public class TestResult extends BasicEntity {
+@Table(name = "status_changes")
+public class StatusChange extends BasicEntity {
 
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "candidate_id", nullable = false)
     private Candidate candidate;
 
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "test_id", nullable = false)
-    private Test test;
+    @JoinColumn(name = "vacancy_id", nullable = false)
+    private Vacancy vacancy;
 
-    @Column(name = "score", nullable = false)
-    private int score;
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinColumn(name = "old_status_id", nullable = false)
+    private Status oldStatus;
 
-    @Column(name = "result_date", nullable = false)
-    private LocalDateTime resultDate;
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinColumn(name = "new_status_id", nullable = false)
+    private Status newStatus;
+
+    @Column(name = "change_date", nullable = false)
+    private LocalDateTime changeDate;
 
 }

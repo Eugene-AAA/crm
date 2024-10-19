@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import ru.hr.crm.DbTests;
-import ru.hr.crm.repository.entity.data.Vacancy;
+import ru.hr.crm.entity.data.Vacancy;
 
 import java.time.LocalDateTime;
 
@@ -27,7 +27,7 @@ class TestRepositoryTest extends DbTests {
     @Test
     @Transactional
     void saveAndFind() {
-        ru.hr.crm.repository.entity.data.Test expected = ru.hr.crm.repository.entity.data.Test.builder()
+        ru.hr.crm.entity.data.Test expected = ru.hr.crm.entity.data.Test.builder()
                 .maxScore(10)
                 .title("title")
                 .vacancy(Vacancy.builder()
@@ -39,9 +39,9 @@ class TestRepositoryTest extends DbTests {
                 .description("desc")
                 .createdAt(LocalDateTime.of(2020, 1, 1, 1, 1))
                 .build();
-        ru.hr.crm.repository.entity.data.Test save = repository.save(expected);
+        ru.hr.crm.entity.data.Test save = repository.save(expected);
         assertNotNull(save);
-        ru.hr.crm.repository.entity.data.Test actual = repository.findById(save.getId()).orElse(null);
+        ru.hr.crm.entity.data.Test actual = repository.findById(save.getId()).orElse(null);
         assertNotNull(actual);
         assertEquals(expected.getVacancy().getTitle(), actual.getVacancy().getTitle());
         assertEquals(expected.getTitle(), actual.getTitle());

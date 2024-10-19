@@ -1,4 +1,4 @@
-package ru.hr.crm.repository.entity.data;
+package ru.hr.crm.entity.data;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
-import ru.hr.crm.repository.entity.BasicEntity;
-import ru.hr.crm.repository.entity.meta.Status;
+import ru.hr.crm.entity.BasicEntity;
+import ru.hr.crm.entity.meta.Status;
 
 import java.time.LocalDateTime;
 
@@ -22,8 +22,8 @@ import java.time.LocalDateTime;
 @SuperBuilder
 @ToString
 @Entity
-@Table(name = "status_changes")
-public class StatusChange extends BasicEntity {
+@Table(name = "comments")
+public class Comment extends BasicEntity {
 
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "candidate_id", nullable = false)
@@ -34,14 +34,13 @@ public class StatusChange extends BasicEntity {
     private Vacancy vacancy;
 
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "old_status_id", nullable = false)
-    private Status oldStatus;
+    @JoinColumn(name = "status_id", nullable = false)
+    private Status status;
 
-    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "new_status_id", nullable = false)
-    private Status newStatus;
+    @Column(name = "comment_text")
+    private String commentText;
 
-    @Column(name = "change_date", nullable = false)
-    private LocalDateTime changeDate;
+    @Column(name = "created_at", nullable = false)
+    private LocalDateTime createdAt;
 
 }
