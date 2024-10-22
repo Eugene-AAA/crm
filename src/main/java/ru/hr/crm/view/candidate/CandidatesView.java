@@ -1,4 +1,4 @@
-package ru.hr.crm.view;
+package ru.hr.crm.view.candidate;
 
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.applayout.AppLayout;

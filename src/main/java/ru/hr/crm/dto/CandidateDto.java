@@ -12,6 +12,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @Builder
 public class CandidateDto {
+    //TODO: Добавить соцсети
+    //TODO: Добавить дату рождения и фильтр, чтобы видеть кого поздравить
+    //TODO: Добавить ссылку на резюме
     private Long id;
     private String name;
     private int age;

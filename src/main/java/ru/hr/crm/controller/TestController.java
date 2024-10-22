@@ -1,4 +1,4 @@
-package ru.hr.crm.view;
+package ru.hr.crm.controller;
 
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
