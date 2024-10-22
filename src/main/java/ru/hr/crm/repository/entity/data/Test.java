@@ -1,4 +1,4 @@
-package ru.hr.crm.entity.data;
+package ru.hr.crm.repository.entity.data;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
-import ru.hr.crm.entity.BasicEntity;
+import ru.hr.crm.repository.entity.BasicEntity;
 
 import java.time.LocalDateTime;
 

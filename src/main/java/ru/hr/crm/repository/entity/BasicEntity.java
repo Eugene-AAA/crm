@@ -1,4 +1,4 @@
-package ru.hr.crm.entity;
+package ru.hr.crm.repository.entity;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

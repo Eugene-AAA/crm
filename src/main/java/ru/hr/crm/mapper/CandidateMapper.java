@@ -2,7 +2,7 @@ package ru.hr.crm.mapper;
 
 import org.springframework.stereotype.Component;
 import ru.hr.crm.dto.CandidateDto;
-import ru.hr.crm.entity.data.Candidate;
+import ru.hr.crm.repository.entity.data.Candidate;
 
 import java.time.LocalDateTime;
 

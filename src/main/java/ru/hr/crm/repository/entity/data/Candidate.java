@@ -1,4 +1,4 @@
-package ru.hr.crm.entity.data;
+package ru.hr.crm.repository.entity.data;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
-import ru.hr.crm.entity.BasicEntity;
+import ru.hr.crm.repository.entity.BasicEntity;
 
 import java.time.LocalDateTime;
 
@@ -18,17 +18,20 @@ import java.time.LocalDateTime;
 @SuperBuilder
 @ToString
 @Entity
-@Table(name = "vacancies")
-public class Vacancy extends BasicEntity {
+@Table(name = "candidates")
+public class Candidate extends BasicEntity {
 
-    @Column(name = "title", nullable = false)
-    private String title;
+    @Column(name = "name", nullable = false)
+    private String name;
 
-    @Column(name = "description")
-    private String description;
+    @Column(name = "email", nullable = false, unique = true)
+    private String email;
 
-    @Column(name = "department", nullable = false)
-    private String department;
+    @Column(name = "phone")
+    private String phone;
+
+    @Column(name = "other_contacts")
+    private String otherContacts;
 
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;

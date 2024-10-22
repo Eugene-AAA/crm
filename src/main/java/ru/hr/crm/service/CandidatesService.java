@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.hr.crm.dto.CandidateDto;
-import ru.hr.crm.entity.data.Candidate;
+import ru.hr.crm.repository.entity.data.Candidate;
 import ru.hr.crm.mapper.CandidateMapper;
 import ru.hr.crm.repository.jpaRepository.CandidateRepository;
 
@@ -19,7 +19,6 @@ public class CandidatesService {
     private final CandidateRepository candidateRepository;
     private final CandidateMapper candidateMapper;
 
-    @Transactional
     public List<CandidateDto> getAllCandidates() {
         List<Candidate> candidates = candidateRepository.findAll();
 
@@ -27,7 +26,6 @@ public class CandidatesService {
                 .map(candidateMapper::toCandidateDto).toList();
     }
 
-    @Transactional
     public Optional<CandidateDto> findById(Long id) {
         return Optional.of(candidateMapper.toCandidateDto(candidateRepository.findById(id).orElseThrow()));
     }

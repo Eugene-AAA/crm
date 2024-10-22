@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import ru.hr.crm.DbTests;
-import ru.hr.crm.entity.data.Candidate;
+import ru.hr.crm.repository.entity.data.Candidate;
 
 import java.time.LocalDateTime;
 

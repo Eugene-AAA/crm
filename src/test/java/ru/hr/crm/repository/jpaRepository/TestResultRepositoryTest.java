@@ -5,9 +5,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import ru.hr.crm.DbTests;
-import ru.hr.crm.entity.data.Candidate;
-import ru.hr.crm.entity.data.TestResult;
-import ru.hr.crm.entity.data.Vacancy;
+import ru.hr.crm.repository.entity.data.Candidate;
+import ru.hr.crm.repository.entity.data.TestResult;
+import ru.hr.crm.repository.entity.data.Vacancy;
 
 import java.time.LocalDateTime;
 
@@ -30,7 +30,7 @@ class TestResultRepositoryTest extends DbTests {
     @Transactional
     void testSaveAndFind() {
         TestResult expected = TestResult.builder()
-                .test(ru.hr.crm.entity.data.Test.builder()
+                .test(ru.hr.crm.repository.entity.data.Test.builder()
                         .maxScore(10)
                         .title("title")
                         .vacancy(Vacancy.builder()
