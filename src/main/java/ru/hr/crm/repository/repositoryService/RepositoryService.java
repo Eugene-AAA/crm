@@ -1,20 +1,11 @@
 package ru.hr.crm.repository.repositoryService;
 
-import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import ru.hr.crm.repository.entity.meta.Status;
-import ru.hr.crm.repository.jpaRepository.StatusRepository;
-
 import java.util.List;
+import java.util.Optional;
 
-@Service
-@AllArgsConstructor
-public class RepositoryService {
-    private StatusRepository repository;
-
-    @Transactional
-    public List<Status> findAll() {
-        return repository.findAll();
-    }
+public interface RepositoryService<T> {
+    List<T> findAll();
+    Optional<T> findById(Long id);
+    T save(T dto);
+    Boolean delete(T dto);
 }

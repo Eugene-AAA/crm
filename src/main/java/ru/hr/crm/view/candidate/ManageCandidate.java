@@ -12,7 +12,7 @@ import com.vaadin.flow.router.HasUrlParameter;
 import com.vaadin.flow.router.Route;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.hr.crm.dto.CandidateDto;
-import ru.hr.crm.service.CandidatesService;
+import ru.hr.crm.service.CandidateServiceImpl;
 
 import java.util.Optional;
 
@@ -29,7 +29,7 @@ public class ManageCandidate extends AppLayout implements HasUrlParameter<Long> 
     Button saveContact;
 
     @Autowired
-    CandidatesService candidatesService;
+    CandidateServiceImpl candidateServiceImpl;
 
     public ManageCandidate() {
 
@@ -62,7 +62,7 @@ public class ManageCandidate extends AppLayout implements HasUrlParameter<Long> 
     public void fillForm() {
 
         if (!id.equals(0L)) {
-            Optional<CandidateDto> candidateDto = candidatesService.findById(id);
+            Optional<CandidateDto> candidateDto = candidateServiceImpl.findById(id);
             candidateDto.ifPresent(candidate -> {
                 name.setValue(candidate.getName());
                 age.setValue(String.valueOf(candidate.getAge()));
@@ -83,7 +83,7 @@ public class ManageCandidate extends AppLayout implements HasUrlParameter<Long> 
             candidateDto.setEmail(email.getValue());
             candidateDto.setPhone(phone.getValue());
             candidateDto.setOtherContacts(otherContacts.getValue());
-            candidatesService.saveCandidate(candidateDto);
+            candidateServiceImpl.saveCandidate(candidateDto);
 
             //Выведем уведомление пользователю и переведем его к списку контактов
             Notification notification = new Notification(id.equals(0L) ? "Соискатель успешно создан" : "Соискатель был изменен", 1000);

@@ -14,7 +14,7 @@ import com.vaadin.flow.router.RouterLink;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.hr.crm.dto.CandidateDto;
-import ru.hr.crm.service.CandidatesService;
+import ru.hr.crm.service.CandidateServiceImpl;
 
 import java.util.List;
 
@@ -22,13 +22,13 @@ import java.util.List;
 public class CandidatesView extends AppLayout {
 
     @Autowired
-    private CandidatesService candidatesService;
+    private CandidateServiceImpl candidateServiceImpl;
     VerticalLayout layout;
     Grid<CandidateDto> grid;
     RouterLink linkCreate;
 
 
-    public CandidatesView(CandidatesService candidatesService) {
+    public CandidatesView(CandidateServiceImpl candidateServiceImpl) {
         layout = new VerticalLayout();
         grid = new Grid<>();
         linkCreate = new RouterLink("Создать нового соискателя", ManageCandidate.class, 0L);
@@ -36,12 +36,12 @@ public class CandidatesView extends AppLayout {
         layout.add(grid);
         addToNavbar(new H3("Список соискателей"));
         setContent(layout);
-        this.candidatesService = candidatesService;
+        this.candidateServiceImpl = candidateServiceImpl;
     }
 
     @PostConstruct
     public void fillGrid() {
-        List<CandidateDto> candidateDtos = candidatesService.getAllCandidates();
+        List<CandidateDto> candidateDtos = candidateServiceImpl.getAllCandidates();
         if (!candidateDtos.isEmpty()) {
             grid.addColumn(CandidateDto::getName).setHeader("Имя");
             grid.addColumn(CandidateDto::getAge).setHeader("Возраст");
@@ -61,13 +61,13 @@ public class CandidatesView extends AppLayout {
                 dialog.add(cancel);
 
                 confirm.addClickListener(clickEvent -> {
-                    candidatesService.deleteCandidate(candidateDto);
+                    candidateServiceImpl.deleteCandidate(candidateDto);
                     dialog.close();
                     Notification notification = new Notification("Соискатель удален", 1000);
                     notification.setPosition(Notification.Position.MIDDLE);
                     notification.open();
 
-                    grid.setItems(candidatesService.getAllCandidates());
+                    grid.setItems(candidateServiceImpl.getAllCandidates());
                 });
 
                 cancel.addClickListener(clickEvent -> dialog.close());

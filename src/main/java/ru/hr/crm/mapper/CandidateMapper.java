@@ -2,7 +2,7 @@ package ru.hr.crm.mapper;
 
 import org.springframework.stereotype.Component;
 import ru.hr.crm.dto.CandidateDto;
-import ru.hr.crm.repository.entity.data.Candidate;
+import ru.hr.crm.repository.model.Candidate;
 
 import java.time.LocalDateTime;
 
@@ -22,7 +22,7 @@ public class CandidateMapper {
     }
 
     public Candidate toCandidate(CandidateDto candidateDto) {
-        return new Candidate().builder()
+        return Candidate.builder()
                 .id(candidateDto.getId())
                 .name(candidateDto.getName())
                 .phone(candidateDto.getPhone())
